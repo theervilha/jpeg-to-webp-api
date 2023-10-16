@@ -21,7 +21,13 @@ app.get("/", async (req, res) => {
 
 async function convert_buffer_to_webp(buffer) {
     image = await sharp(buffer)
-    buffer = await image.webp().toBuffer()
+    buffer = await image.webp()
+        // Resize to use in my application
+        .resize(512, 512, {
+            fit: sharp.fit.inside,
+            withoutEnlargement: true,
+        }) 
+        .toBuffer()
     return buffer
 }
 
