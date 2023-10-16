@@ -24,8 +24,8 @@ async function convert_buffer_to_webp(buffer) {
     buffer = await image.webp()
         // Resize to use in my application
         .resize(512, 512, {
-            fit: sharp.fit.inside,
-            withoutEnlargement: true,
+            fit: "contain",
+            background: { r: 0, g: 0, b: 0, alpha: 0 } // white background
         }) 
         .toBuffer()
     return buffer
